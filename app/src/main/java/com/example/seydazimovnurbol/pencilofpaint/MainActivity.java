@@ -1,11 +1,13 @@
 package com.example.seydazimovnurbol.pencilofpaint;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -53,6 +55,25 @@ public class MainActivity extends AppCompatActivity {
 						    }
 					    })
 					    .setRoundColorButton(true).show();
+		    }
+	    });
+	    
+	    SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+	    seekBar.setProgress(5);
+	    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+		    @Override
+		    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+				canvasView.setWidth(i);
+		    }
+		
+		    @Override
+		    public void onStartTrackingTouch(SeekBar seekBar) {
+			
+		    }
+		
+		    @Override
+		    public void onStopTrackingTouch(SeekBar seekBar) {
+			
 		    }
 	    });
     }

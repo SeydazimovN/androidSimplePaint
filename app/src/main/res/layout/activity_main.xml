@@ -48,4 +48,14 @@
         android:layout_marginRight="13dp"
         android:layout_marginEnd="13dp"
         android:id="@+id/fab" />
+	<SeekBar
+		android:id = "@+id/seekBar"
+		style = "@style/Widget.AppCompat.SeekBar.Discrete"
+		android:layout_width = "150dp"
+		android:layout_height = "wrap_content"
+		android:layout_below = "@+id/canvas"
+		android:layout_marginLeft = "14dp" android:layout_marginStart = "14dp"
+		android:layout_marginTop = "12dp" android:layout_toEndOf = "@+id/button"
+		android:layout_toRightOf = "@+id/button" android:max = "10"
+		android:progress = "3"/>
 </RelativeLayout>

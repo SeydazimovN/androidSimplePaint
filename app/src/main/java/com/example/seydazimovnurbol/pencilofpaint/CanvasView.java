@@ -28,6 +28,7 @@ public class CanvasView extends View {
     private float mX, mY;
     private static final float TOLERANCE = 5;
     Context context;
+	private int paintWidth = 1;
 	
 	public int getCurrentColor() {
 		return currentColor;
@@ -122,5 +123,10 @@ public class CanvasView extends View {
 		mPaint.setStyle(Paint.Style.STROKE);
 		mPaint.setStrokeJoin(Paint.Join.ROUND);
 		mPaint.setStrokeWidth(4f);
+	}
+	
+	public void setWidth(int width) {
+		this.paintWidth = width;
+		mPaint.setStrokeWidth(4f * width);
 	}
 }
