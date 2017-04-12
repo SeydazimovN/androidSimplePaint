@@ -18,6 +18,15 @@
         android:layout_alignParentTop="true"
         android:layout_above="@+id/button"
         android:id="@+id/canvas"/>
+	
+	<com.github.clans.fab.FloatingActionButton
+		android:layout_width = "wrap_content"
+		android:layout_height = "wrap_content"
+		android:id="@+id/floatingActionButton"
+		android:src="@drawable/fab_add"
+		android:layout_marginTop = "13dp"
+		android:layout_alignParentTop = "true" android:layout_alignRight = "@+id/fab"
+		android:layout_alignEnd = "@+id/fab"/>
 
     <Button
         android:text="CLEAR"

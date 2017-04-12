@@ -22,41 +22,44 @@ public class CanvasView extends View {
     public int width;
     public int height;
     private Bitmap mBitmap;
+	private Paint mPaint;
     private Canvas mCanvas;
     private Path mPath;
     private float mX, mY;
     private static final float TOLERANCE = 5;
     Context context;
-
-    public int currentColor = Color.BLACK;
+	
+	public int getCurrentColor() {
+		return currentColor;
+	}
+	
+	public void setCurrentColor(int currentColor) {
+		this.currentColor = currentColor;
+		mPaint.setColor(currentColor);
+	}
+	
+	private int currentColor = Color.BLACK;
 
     public CanvasView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-
-        mPath = new Path();
     }
-
+	
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
-
+	    createCanvas(w, h);
+	    
+        // mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        // mCanvas = new Canvas(mBitmap);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(currentColor);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeWidth(4f);
-
-        canvas.drawPath(mPath, paint);
+	    canvas.drawBitmap(mBitmap, 0, 0, null);
+        canvas.drawPath(mPath, mPaint);
     }
 
     private void startTouch(float x, float y) {
@@ -73,15 +76,17 @@ public class CanvasView extends View {
             mX = x;
             mY = y;
         }
-
     }
 
-    public void  clearCanvas() {
-        mPath.reset();
+    public void clearCanvas() {
+	    createCanvas(getWidth(), getHeight());
         invalidate();
     }
+    
     private void upTouch() {
-        mPath.lineTo(mX, mY);
+	    mPath.lineTo(mX, mY);
+	    mCanvas.drawPath(mPath, mPaint);
+	    mPath.reset();
     }
 
     @Override
@@ -104,4 +109,18 @@ public class CanvasView extends View {
 
         return true;
     }
+	
+	private void createCanvas(int w, int h) {
+		mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+		
+		mPath = new Path();
+		mCanvas = new Canvas(mBitmap);
+		
+		mPaint = new Paint();
+		mPaint.setAntiAlias(true);
+		mPaint.setColor(currentColor);
+		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setStrokeJoin(Paint.Join.ROUND);
+		mPaint.setStrokeWidth(4f);
+	}
 }
